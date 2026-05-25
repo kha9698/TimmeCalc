@@ -1,32 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
+  <link rel="stylesheet" href="style.css">
 
-    h1 {
-      color: #333;
-    }
-  </style>
+  <title>Responsive Page</title>
 </head>
-
 <body>
 
-  <h1>Hello World</h1>
-  <p>This is a default HTML template.</p>
+  <div class="container">
 
-  <script>
-    console.log("Website loaded");
-  </script>
+<h2>Time Difference</h2>
+
+<input type="time" id="time1">
+<button onclick="setCurrent('time1', 'time')">
+  Current Time
+</button>
+
+<input type="time" id="time2">
+<button onclick="setCurrent('time2', 'time')">
+  Current Time
+</button>
+
+<button class="cDiff" onclick="calculateTimeDifference()">
+  Calculate Time Difference
+</button>
+
+<p class="Result" id="timeResult"></p>
+
+
+<h2>Select Days</h2>
+
+<input type="date" id="date1">
+<button onclick="setCurrent('date1', 'date')">
+  Current Date
+</button>
+
+<input type="date" id="date2">
+<button onclick="setCurrent('date2', 'date')">
+  Current Date
+</button>
+
+<button class="cDiff" onclick="calculateDateDifference()">
+  Calculate Date Difference
+</button>
+
+<p class="Result" id="dateResult"></p>
+
+  </div>
+
+<script>
+
+  function setCurrent(inputId, type) {
+
+    const now = new Date();
+
+    if (type === "time") {
+
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+
+      document.getElementById(inputId).value =
+        `${hours}:${minutes}`;
+    }
+
+    if (type === "date") {
+
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+
+      document.getElementById(inputId).value =
+        `${year}-${month}-${day}`;
+    }
+  }
+
+
+
+  function calculateTimeDifference() {
+
+    const time1 = document.getElementById("time1").value;
+    const time2 = document.getElementById("time2").value;
+
+    if (!time1 || !time2) {
+      alert("Please select both times");
+      return;
+    }
+
+    const [h1, m1] = time1.split(":").map(Number);
+    const [h2, m2] = time2.split(":").map(Number);
+
+    const minutes1 = h1 * 60 + m1;
+    const minutes2 = h2 * 60 + m2;
+
+    let diff = Math.abs(minutes2 - minutes1);
+
+    const hours = Math.floor(diff / 60);
+    const minutes = diff % 60;
+
+    document.getElementById("timeResult").innerText =
+      `${hours} hour(s) and ${minutes} minute(s)`;
+  }
+
+
+
+  function calculateDateDifference() {
+
+    const date1 =
+      new Date(document.getElementById("date1").value);
+
+    const date2 =
+      new Date(document.getElementById("date2").value);
+
+    if (!document.getElementById("date1").value ||
+        !document.getElementById("date2").value) {
+
+      alert("Please select both dates");
+      return;
+    }
+
+    const diffTime = Math.abs(date2 - date1);
+
+    const days =
+      Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    document.getElementById("dateResult").innerText =
+      `${days} day(s)`;
+  }
+
+</script>
 
 </body>
 </html>
