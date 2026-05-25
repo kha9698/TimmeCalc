@@ -1,0 +1,77 @@
+/* Reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Container */
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Inputs & Buttons */
+
+input,
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* Input */
+
+input {
+  border: 1px solid #ccc;
+}
+
+/* Button */
+
+button {
+  border: none;
+  background: #333;
+  color: white;
+  cursor: pointer;
+}
+
+.Result{
+ padding: 15px;;
+}
+
+.cDiff{
+  border: none;
+  background: blue;
+  color: white;
+  cursor: pointer;
+}
+
+/* Mobile Tweaks */
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+}
